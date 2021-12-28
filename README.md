@@ -9,7 +9,7 @@
 
 协程的异常处理流程如下：
 
-![](assets\coroutine-exception-handler.png)
+![diagrams](.\assets\coroutine-exception-handler.png)
 
 所以如果我们想捕获协程的异常且让应用不崩溃，有两种方案：
 
