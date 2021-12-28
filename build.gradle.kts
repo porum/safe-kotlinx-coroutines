@@ -13,7 +13,7 @@ subprojects {
     resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS)
   }
 
-  if (name.startsWith("safe-coroutines")) {
+  if (name.startsWith("safe-kotlinx-coroutines")) {
 //    apply(from = publishScript)
     apply<SigningPlugin>()
     apply<MavenPublishPlugin>()

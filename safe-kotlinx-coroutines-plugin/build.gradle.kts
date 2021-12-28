@@ -31,8 +31,8 @@ tasks.dokkaJavadoc.configure {
 
 gradlePlugin {
   plugins {
-    create("safe-coroutine-plugin") {
-      id = "safe-coroutine"
+    create("safe-kotlinx-coroutines-plugin") {
+      id = "safe-kotlinx-coroutines"
       implementationClass = "com.panda912.safecoroutines.plugin.SafeCoroutinePlugin"
     }
   }
