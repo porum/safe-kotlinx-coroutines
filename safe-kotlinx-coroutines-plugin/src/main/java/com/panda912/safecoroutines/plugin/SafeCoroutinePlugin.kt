@@ -44,6 +44,6 @@ abstract class SafeCoroutineVisitorFactory :
   }
 
   override fun isInstrumentable(classData: ClassData): Boolean {
-    return classData.className == "kotlinx.coroutines.BuildersKt"
+    return classData.className == "kotlinx.coroutines.CoroutineExceptionHandlerKt"
   }
 }
