@@ -27,24 +27,36 @@ class SafeCoroutineClassVisitor(
 
         if (ifnonnull != null && ifnonnull.next.type == AbstractInsnNode.JUMP_INSN && ifnonnull.next.opcode == Opcodes.GOTO) {
           val startIndex = instructions.indexOf((ifnonnull.next as JumpInsnNode).label)
-          for (index in instructions.indices) {
+
+          var endIndex = -1
+          for (index in startIndex + 1 until instructions.size) {
             val insnNode = instructions[index]
-            if (
-              insnNode.type == AbstractInsnNode.METHOD_INSN &&
-              insnNode.opcode == Opcodes.INVOKESTATIC &&
-              (insnNode as MethodInsnNode).owner == "kotlinx/coroutines/CoroutineExceptionHandlerImplKt" &&
-              insnNode.name == "handleCoroutineExceptionImpl" &&
-              insnNode.desc == "(Lkotlin/coroutines/CoroutineContext;Ljava/lang/Throwable;)V" &&
-              index > startIndex
-            ) {
-              val replaced = MethodInsnNode(
-                Opcodes.INVOKESTATIC,
-                "kotlinx/coroutines/GlobalCoroutineExceptionHandlerImplKt",
-                insnNode.name,
-                insnNode.desc
-              )
-              methodNode.instructions.set(insnNode, replaced)
-              break@outer
+            if (insnNode.type == AbstractInsnNode.LABEL) {
+              endIndex = index
+              break
+            }
+          }
+
+          if (endIndex != -1) {
+            println("$startIndex  $endIndex")
+            for (index in startIndex + 1 until endIndex) {
+              val insnNode = instructions[index]
+              if (
+                insnNode.type == AbstractInsnNode.METHOD_INSN &&
+                insnNode.opcode == Opcodes.INVOKESTATIC &&
+                (insnNode as MethodInsnNode).owner == "kotlinx/coroutines/CoroutineExceptionHandlerImplKt" &&
+                insnNode.name == "handleCoroutineExceptionImpl" &&
+                insnNode.desc == "(Lkotlin/coroutines/CoroutineContext;Ljava/lang/Throwable;)V"
+              ) {
+                val replaced = MethodInsnNode(
+                  Opcodes.INVOKESTATIC,
+                  "kotlinx/coroutines/GlobalCoroutineExceptionHandlerImplKt",
+                  insnNode.name,
+                  insnNode.desc
+                )
+                methodNode.instructions.set(insnNode, replaced)
+                break@outer
+              }
             }
           }
         }
