@@ -50,7 +50,7 @@ public static /* synthetic */ Job launch$default(CoroutineScope coroutineScope, 
 ```java
 public static final Job launch(CoroutineScope $this$launch, CoroutineContext context, CoroutineStart start, Function2<? super CoroutineScope, ? super Continuation<? super Unit>, ? extends Object> function2) {
         return BuildersKt__Builders_commonKt.launch($this$launch, context, start, function2);
-    }
+}
 ```
 
 发现 `BuilderKt.launch` 方法非常简单，没有任何逻辑，就是调用 `BuildersKt__Builders_commonKt.launch`，所以我们选择在此处插桩，处理字节码会比较方便。
