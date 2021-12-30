@@ -13,6 +13,6 @@
 
 协程的异常处理流程如下：
 
-![](./assets/coroutine-exception-handler.png)
+![diagrams](./assets/coroutine-exception-handler.png)
 
 本库是通过修改 `handleCoroutineException` 方法，如果没有找到 `CoroutineExceptionHandler`，则走我们自己的异常处理流程。
