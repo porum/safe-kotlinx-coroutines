@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation 'io.github.porum:safe-kotlinx-coroutines:1.0.0'
+    implementation 'io.github.porum:safe-kotlinx-coroutines:0.0.1-SNAPSHOT'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2'
     implementation 'androidx.appcompat:appcompat:1.4.0'

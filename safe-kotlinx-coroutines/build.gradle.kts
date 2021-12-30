@@ -1,6 +1,12 @@
 plugins {
   kotlin("jvm")
+  `maven-publish`
+  signing
   id("org.jetbrains.dokka") version "1.6.0"
+}
+
+dependencies {
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2")
 }
 
 // https://kotlin.github.io/dokka/1.6.0/user_guide/gradle/usage/#configuration-options
@@ -26,11 +32,31 @@ tasks.dokkaJavadoc.configure {
   }
 }
 
-dependencies {
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2")
+val sourceJar by tasks.registering(Jar::class) {
+  from(sourceSets.main.get().allSource)
+  archiveClassifier.set("sources")
 }
 
-java {
-  sourceCompatibility = JavaVersion.VERSION_11
-  targetCompatibility = JavaVersion.VERSION_11
+val dokkaJavadocJar by tasks.registering(Jar::class) {
+  dependsOn(tasks.dokkaJavadoc)
+  from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
+  archiveClassifier.set("javadoc")
+}
+
+publishing {
+  publications {
+    create<MavenPublication>("default") {
+      from(components["java"])
+      artifact(sourceJar)
+      artifact(dokkaJavadocJar)
+      pom {
+        name.set("io.github.porum:safe-kotlinx-coroutines")
+        description.set("safe-kotlinx-coroutines library")
+      }
+    }
+  }
+}
+
+signing {
+  sign(extensions.getByType<PublishingExtension>().publications)
 }

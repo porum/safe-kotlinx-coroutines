@@ -2,8 +2,26 @@ plugins {
   kotlin("jvm")
   `java-gradle-plugin`
   `kotlin-dsl`
+  `maven-publish`
+  signing
   id("com.gradle.plugin-publish") version "0.16.0"
   id("org.jetbrains.dokka") version "1.6.0"
+}
+
+dependencies {
+  implementation("org.ow2.asm:asm-tree:9.2")
+  implementation(gradleApi())
+  compileOnly("com.android.tools.build:gradle:7.0.4")
+  compileOnly(kotlin("gradle-plugin", "1.6.10"))
+}
+
+gradlePlugin {
+  plugins {
+    create("safe-kotlinx-coroutines-plugin") {
+      id = "safe-kotlinx-coroutines"
+      implementationClass = "com.panda912.safecoroutines.plugin.SafeCoroutinePlugin"
+    }
+  }
 }
 
 // https://kotlin.github.io/dokka/1.6.0/user_guide/gradle/usage/#configuration-options
@@ -29,23 +47,30 @@ tasks.dokkaJavadoc.configure {
   }
 }
 
-gradlePlugin {
-  plugins {
-    create("safe-kotlinx-coroutines-plugin") {
-      id = "safe-kotlinx-coroutines"
-      implementationClass = "com.panda912.safecoroutines.plugin.SafeCoroutinePlugin"
+val sourceJar by tasks.registering(Jar::class) {
+  from(sourceSets.main.get().allSource)
+  archiveClassifier.set("sources")
+}
+
+val dokkaJavadocJar by tasks.registering(Jar::class) {
+  dependsOn(tasks.dokkaJavadoc)
+  from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
+  archiveClassifier.set("javadoc")
+}
+
+publishing {
+  publications {
+    create<MavenPublication>("pluginMaven") {
+      artifact(sourceJar)
+      artifact(dokkaJavadocJar)
+      pom {
+        name.set("io.github.porum:safe-kotlinx-coroutines-plugin")
+        description.set("safe-kotlinx-coroutines gradle plugin")
+      }
     }
   }
 }
 
-dependencies {
-  implementation("org.ow2.asm:asm-tree:9.2")
-  implementation(gradleApi())
-  compileOnly("com.android.tools.build:gradle:7.0.4")
-  compileOnly(kotlin("gradle-plugin", "1.6.10"))
-}
-
-java {
-  sourceCompatibility = JavaVersion.VERSION_11
-  targetCompatibility = JavaVersion.VERSION_11
+signing {
+  sign(extensions.getByType<PublishingExtension>().publications)
 }

@@ -38,7 +38,6 @@ class SafeCoroutineClassVisitor(
           }
 
           if (endIndex != -1) {
-            println("$startIndex  $endIndex")
             for (index in startIndex + 1 until endIndex) {
               val insnNode = instructions[index]
               if (
