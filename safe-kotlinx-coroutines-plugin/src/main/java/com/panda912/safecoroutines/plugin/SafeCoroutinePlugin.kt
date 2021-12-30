@@ -1,7 +1,7 @@
 package com.panda912.safecoroutines.plugin
 
+import com.android.build.api.extension.AndroidComponentsExtension
 import com.android.build.api.instrumentation.*
-import com.android.build.api.variant.AndroidComponentsExtension
 import com.android.build.api.variant.ApplicationVariant
 import com.android.build.api.variant.LibraryVariant
 import org.gradle.api.Plugin
