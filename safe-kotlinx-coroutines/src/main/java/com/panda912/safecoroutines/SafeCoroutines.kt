@@ -18,7 +18,7 @@ object SafeCoroutines {
     }
   }
 
-  fun handleException(context: CoroutineContext, exception: Throwable) {
+  internal fun handleException(context: CoroutineContext, exception: Throwable) {
     handler.handleException(context, exception)
   }
 }
