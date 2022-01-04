@@ -4,7 +4,6 @@ plugins {
   `kotlin-dsl`
   `maven-publish`
   signing
-  id("com.gradle.plugin-publish") version "0.16.0"
   id("org.jetbrains.dokka") version "1.6.0"
 }
 
