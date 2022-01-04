@@ -18,5 +18,5 @@ dependencies {
   implementation(gradleApi())
   implementation("com.android.tools.build:gradle:7.0.4")
   implementation(kotlin("gradle-plugin", "1.6.10"))
-  implementation("io.github.porum:safe-kotlinx-coroutines-plugin:0.0.1-SNAPSHOT")
+  implementation("io.github.porum:safe-kotlinx-coroutines-plugin:0.0.2")
 }
