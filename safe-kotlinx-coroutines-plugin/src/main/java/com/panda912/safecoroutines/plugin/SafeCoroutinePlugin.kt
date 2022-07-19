@@ -1,7 +1,7 @@
 package com.panda912.safecoroutines.plugin
 
-import com.android.build.api.extension.AndroidComponentsExtension
 import com.android.build.api.instrumentation.*
+import com.android.build.api.variant.AndroidComponentsExtension
 import com.android.build.api.variant.ApplicationVariant
 import com.android.build.api.variant.LibraryVariant
 import org.gradle.api.Plugin
@@ -11,7 +11,6 @@ import org.objectweb.asm.ClassVisitor
 /**
  * Created by panda on 2021/12/24 13:16
  */
-@Suppress("UnstableApiUsage")
 class SafeCoroutinePlugin : Plugin<Project> {
 
   override fun apply(project: Project) {
@@ -19,11 +18,11 @@ class SafeCoroutinePlugin : Plugin<Project> {
     androidExtension.onVariants { variant ->
       when (variant) {
         is ApplicationVariant -> {
-          variant.transformClassesWith(
+          variant.instrumentation.transformClassesWith(
             SafeCoroutineVisitorFactory::class.java,
             InstrumentationScope.ALL
           ) {}
-          variant.setAsmFramesComputationMode(FramesComputationMode.COMPUTE_FRAMES_FOR_INSTRUMENTED_METHODS)
+          variant.instrumentation.setAsmFramesComputationMode(FramesComputationMode.COMPUTE_FRAMES_FOR_INSTRUMENTED_METHODS)
         }
         is LibraryVariant -> {}
         else -> {}
@@ -32,7 +31,6 @@ class SafeCoroutinePlugin : Plugin<Project> {
   }
 }
 
-@Suppress("UnstableApiUsage")
 abstract class SafeCoroutineVisitorFactory :
   AsmClassVisitorFactory<InstrumentationParameters.None> {
 

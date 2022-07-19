@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.1")
 }
 
 // https://kotlin.github.io/dokka/1.6.0/user_guide/gradle/usage/#configuration-options

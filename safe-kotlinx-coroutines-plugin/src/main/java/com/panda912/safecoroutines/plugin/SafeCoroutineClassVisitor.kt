@@ -23,42 +23,52 @@ class SafeCoroutineClassVisitor(
 
         val ifnonnull = instructions.find {
           it.type == AbstractInsnNode.JUMP_INSN && it.opcode == Opcodes.IFNONNULL
+        } ?: break@outer
+
+        var startIndex = -1
+        if (ifnonnull.next.opcode == Opcodes.GOTO) { // coroutine version 1.5.2
+          startIndex = instructions.indexOf((ifnonnull.next as JumpInsnNode).label)
+        } else if (ifnonnull.next.opcode == Opcodes.POP && ifnonnull.next.next.opcode == Opcodes.GOTO) { // coroutine version 1.6.1
+          startIndex = instructions.indexOf((ifnonnull.next.next as JumpInsnNode).label)
         }
 
-        if (ifnonnull != null && ifnonnull.next.type == AbstractInsnNode.JUMP_INSN && ifnonnull.next.opcode == Opcodes.GOTO) {
-          val startIndex = instructions.indexOf((ifnonnull.next as JumpInsnNode).label)
+        if (startIndex == -1) {
+          break@outer
+        }
 
-          var endIndex = -1
-          for (index in startIndex + 1 until instructions.size) {
-            val insnNode = instructions[index]
-            if (insnNode.type == AbstractInsnNode.LABEL) {
-              endIndex = index
-              break
-            }
-          }
-
-          if (endIndex != -1) {
-            for (index in startIndex + 1 until endIndex) {
-              val insnNode = instructions[index]
-              if (
-                insnNode.type == AbstractInsnNode.METHOD_INSN &&
-                insnNode.opcode == Opcodes.INVOKESTATIC &&
-                (insnNode as MethodInsnNode).owner == "kotlinx/coroutines/CoroutineExceptionHandlerImplKt" &&
-                insnNode.name == "handleCoroutineExceptionImpl" &&
-                insnNode.desc == "(Lkotlin/coroutines/CoroutineContext;Ljava/lang/Throwable;)V"
-              ) {
-                val replaced = MethodInsnNode(
-                  Opcodes.INVOKESTATIC,
-                  "kotlinx/coroutines/GlobalCoroutineExceptionHandlerImplKt",
-                  insnNode.name,
-                  insnNode.desc
-                )
-                methodNode.instructions.set(insnNode, replaced)
-                break@outer
-              }
-            }
+        var endIndex = -1
+        for (index in startIndex + 1 until instructions.size) {
+          val insnNode = instructions[index]
+          if (insnNode.type == AbstractInsnNode.LABEL) {
+            endIndex = index
+            break
           }
         }
+
+        if (endIndex == -1) {
+          break@outer
+        }
+
+        for (index in startIndex + 1 until endIndex) {
+          val insnNode = instructions[index]
+          if (
+            insnNode.type == AbstractInsnNode.METHOD_INSN &&
+            insnNode.opcode == Opcodes.INVOKESTATIC &&
+            (insnNode as MethodInsnNode).owner == "kotlinx/coroutines/CoroutineExceptionHandlerImplKt" &&
+            insnNode.name == "handleCoroutineExceptionImpl" &&
+            insnNode.desc == "(Lkotlin/coroutines/CoroutineContext;Ljava/lang/Throwable;)V"
+          ) {
+            val replaced = MethodInsnNode(
+              Opcodes.INVOKESTATIC,
+              "kotlinx/coroutines/GlobalCoroutineExceptionHandlerImplKt",
+              insnNode.name,
+              insnNode.desc
+            )
+            methodNode.instructions.set(insnNode, replaced)
+            break@outer
+          }
+        }
+
       }
     }
 

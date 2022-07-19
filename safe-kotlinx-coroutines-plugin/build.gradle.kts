@@ -10,7 +10,7 @@ plugins {
 dependencies {
   implementation("org.ow2.asm:asm-tree:9.2")
   implementation(gradleApi())
-  compileOnly("com.android.tools.build:gradle:7.0.4")
+  compileOnly("com.android.tools.build:gradle:7.2.0")
   compileOnly(kotlin("gradle-plugin", "1.6.10"))
 }
 
