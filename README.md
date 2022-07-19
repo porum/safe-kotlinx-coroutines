@@ -1,8 +1,8 @@
 # safe-kotlinx-coroutines
 
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![safe-kotlinx-coroutines](https://img.shields.io/badge/safe--kotlinx--coroutines-0.0.2-brightgreen.svg)](https://search.maven.org/artifact/io.github.porum/safe-kotlinx-coroutines/0.0.2/jar)
-[![safe-kotlinx-coroutines-plugin](https://img.shields.io/badge/safe--kotlinx--coroutines--plugin-0.0.2-brightgreen.svg)](https://search.maven.org/artifact/io.github.porum/safe-kotlinx-coroutines-plugin/0.0.2/jar)
+[![safe-kotlinx-coroutines](https://img.shields.io/badge/safe--kotlinx--coroutines-0.0.4-brightgreen.svg)](https://search.maven.org/artifact/io.github.porum/safe-kotlinx-coroutines/0.0.4/jar)
+[![safe-kotlinx-coroutines-plugin](https://img.shields.io/badge/safe--kotlinx--coroutines--plugin-0.0.4-brightgreen.svg)](https://search.maven.org/artifact/io.github.porum/safe-kotlinx-coroutines-plugin/0.0.4/jar)
 
 这是一个防止因协程发生异常而导致应用崩溃的一个库。
 
