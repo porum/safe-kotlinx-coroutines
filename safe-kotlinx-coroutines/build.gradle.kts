@@ -2,11 +2,11 @@ plugins {
   kotlin("jvm")
   `maven-publish`
   signing
-  id("org.jetbrains.dokka") version "1.6.0"
+  id("org.jetbrains.dokka")
 }
 
 dependencies {
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.1")
+  compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.4")
 }
 
 // https://kotlin.github.io/dokka/1.6.0/user_guide/gradle/usage/#configuration-options

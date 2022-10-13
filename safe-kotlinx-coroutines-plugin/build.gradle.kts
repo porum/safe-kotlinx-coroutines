@@ -4,14 +4,13 @@ plugins {
   `kotlin-dsl`
   `maven-publish`
   signing
-  id("org.jetbrains.dokka") version "1.6.0"
+  id("org.jetbrains.dokka")
 }
 
 dependencies {
   implementation("org.ow2.asm:asm-tree:9.2")
   implementation(gradleApi())
-  compileOnly("com.android.tools.build:gradle:7.2.0")
-  compileOnly(kotlin("gradle-plugin", "1.6.10"))
+  compileOnly("com.android.tools.build:gradle:7.3.0")
 }
 
 gradlePlugin {

@@ -1,14 +1,23 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+  id("com.android.application") version "7.3.0" apply false
+  id("com.android.library") version "7.3.0" apply false
+  id("org.jetbrains.kotlin.android") version "1.7.20" apply false
+  id("org.jetbrains.dokka") version "1.7.20" apply false
+}
+
+buildscript {
+  dependencies {
+    classpath("io.github.porum:safe-kotlinx-coroutines-plugin:0.0.4")
+  }
+}
+
+configurations.configureEach {
+  resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS)
+}
 
 subprojects {
-  repositories {
-    google()
-    maven {
-      setUrl("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-    }
-    mavenCentral()
-  }
-
   configurations.configureEach {
     resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS)
   }
