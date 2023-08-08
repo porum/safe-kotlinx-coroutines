@@ -39,7 +39,7 @@ class CoroutineContextClassVisitor(
       val labelNode = instructions[instructions.indexOf(checkNotNullParameterInsn) + 1] as LabelNode
 
       // insert the following code at beginning of `plus` method:
-      // val handler = context[CoroutineExceptionHandler]
+      // val handler = this[CoroutineExceptionHandler]
       // if (handler == null) {
       //   this = CombinedContext(this, globalCoroutineExceptionHandler)
       // }
