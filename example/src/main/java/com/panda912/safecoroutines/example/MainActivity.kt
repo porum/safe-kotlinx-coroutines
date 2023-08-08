@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity() {
 
     findViewById<Button>(R.id.btn_external).setOnClickListener {
       lifecycleScope.launch(CustomHandler()) {
-        throw RuntimeException("Aohhh")
+        val handler = this.coroutineContext[CoroutineExceptionHandler]
+        throw RuntimeException("Aohhh-->>$handler")
       }
     }
   }

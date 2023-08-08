@@ -1,8 +1,9 @@
 package com.panda912.safecoroutines.example
 
 import android.app.Application
-import com.panda912.safecoroutines.SafeCoroutines
+import kotlinx.coroutines.CaughtExceptionHandler
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.SafeCoroutines
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -11,14 +12,8 @@ import kotlin.coroutines.CoroutineContext
 class SampleApplication : Application() {
   override fun onCreate() {
     super.onCreate()
-
-    SafeCoroutines.handler = object : CoroutineExceptionHandler {
-      override val key: CoroutineContext.Key<*>
-        get() = CoroutineExceptionHandler
-
-      override fun handleException(context: CoroutineContext, exception: Throwable) {
-        System.err.println(exception)
-      }
+    SafeCoroutines.setDefaultCaughtExceptionHandler { context, exception ->
+      System.err.println(exception)
     }
   }
 }
