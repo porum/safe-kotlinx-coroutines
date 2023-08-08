@@ -27,14 +27,8 @@ subprojects {
 
       val GROUP: String by project
       val VERSION: String by project
-
-      val properties = java.util.Properties()
-      properties.load(project.rootProject.file("local.properties").inputStream())
-      project.ext["sonatypeUserName"] = properties.getProperty("sonatypeUserName")
-      project.ext["sonatypePassword"] = properties.getProperty("sonatypePassword")
-      project.ext["signing.keyId"] = properties.getProperty("signing.keyId")
-      project.ext["signing.password"] = properties.getProperty("signing.password")
-      project.ext["signing.secretKeyRingFile"] = properties.getProperty("signing.secretKeyRingFile")
+      val sonatypeUserName: String by project
+      val sonatypePassword: String by project
 
       val publishExtension = extensions.getByType<PublishingExtension>()
       publishExtension.repositories {
@@ -47,8 +41,8 @@ subprojects {
           }
           setUrl(url)
           credentials {
-            username = project.ext["sonatypeUserName"] as String
-            password = project.ext["sonatypePassword"] as String
+            username = sonatypeUserName
+            password = sonatypePassword
           }
         }
       }
