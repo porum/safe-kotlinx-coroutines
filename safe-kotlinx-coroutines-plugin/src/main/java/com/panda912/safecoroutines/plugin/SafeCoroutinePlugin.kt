@@ -7,6 +7,8 @@ import com.android.build.api.variant.LibraryVariant
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.objectweb.asm.ClassVisitor
+import org.objectweb.asm.util.TraceClassVisitor
+import java.io.PrintWriter
 
 /**
  * Created by panda on 2021/12/24 13:16
@@ -38,10 +40,13 @@ abstract class SafeCoroutineVisitorFactory :
     classContext: ClassContext,
     nextClassVisitor: ClassVisitor
   ): ClassVisitor {
-    return SafeCoroutineClassVisitor(nextClassVisitor)
+    // return TraceClassVisitor(nextClassVisitor, PrintWriter(System.out))
+    return CoroutineContextClassVisitor(nextClassVisitor)
+    // return SafeCoroutineClassVisitor(nextClassVisitor)
   }
 
   override fun isInstrumentable(classData: ClassData): Boolean {
-    return classData.className == "kotlinx.coroutines.CoroutineExceptionHandlerKt"
+    return classData.className == "kotlin.coroutines.CoroutineContext\$DefaultImpls"
+    // return classData.className == "kotlinx.coroutines.CoroutineExceptionHandlerKt"
   }
 }

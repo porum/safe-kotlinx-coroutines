@@ -9,6 +9,7 @@ plugins {
 
 dependencies {
   implementation("org.ow2.asm:asm-tree:9.2")
+  implementation("org.ow2.asm:asm-util:9.2")
   implementation(gradleApi())
   compileOnly("com.android.tools.build:gradle:7.3.0")
 }

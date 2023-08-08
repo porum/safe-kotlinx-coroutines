@@ -1,17 +1,19 @@
-package com.panda912.safecoroutines.example
+package com.panda912.safecoroutines
 
-import android.util.Log
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlin.coroutines.CoroutineContext
 
+
 /**
- * Created by panda on 2021/12/28 10:53
+ * Created by panda on 2023/8/8 15:38
  */
-class GlobalCoroutineExceptionHandler : CoroutineExceptionHandler {
+internal class GlobalCoroutineExceptionHandler : CoroutineExceptionHandler {
+
   override val key: CoroutineContext.Key<*>
     get() = CoroutineExceptionHandler
 
   override fun handleException(context: CoroutineContext, exception: Throwable) {
-    Log.e("GlobalExceptionHandler", "handleException", exception)
   }
 }
+
+internal val globalHandler = GlobalCoroutineExceptionHandler()
