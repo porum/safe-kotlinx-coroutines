@@ -9,7 +9,7 @@ plugins {
 
 buildscript {
   dependencies {
-    classpath("io.github.porum:safe-kotlinx-coroutines-plugin:0.0.4")
+    classpath("io.github.porum:safe-kotlinx-coroutines-plugin:0.0.5")
   }
 }
 

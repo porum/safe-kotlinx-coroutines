@@ -33,11 +33,11 @@ android {
 }
 
 dependencies {
-  implementation(project(":safe-kotlinx-coroutines"))
-  // implementation("io.github.porum:safe-kotlinx-coroutines:0.0.4")
-  implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+  // implementation(project(":safe-kotlinx-coroutines"))
+  implementation("io.github.porum:safe-kotlinx-coroutines:0.0.5")
+  implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.7.3")
-  implementation("androidx.appcompat:appcompat:1.5.0")
+  implementation("androidx.appcompat:appcompat:1.6.1")
   testImplementation("junit:junit:4.+")
   androidTestImplementation("androidx.test.ext:junit:1.1.3")
   androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")

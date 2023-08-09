@@ -10,10 +10,10 @@ class SampleApplication : Application() {
   override fun onCreate() {
     super.onCreate()
 
-SafeCoroutines.setDefaultCaughtExceptionHandler { context, exception ->
-  context.fold("SafeCoroutines: ") { acc, element -> "$acc$element " }
-    .plus(exception)
-    .also(::println)
-}
+    SafeCoroutines.setDefaultCaughtExceptionHandler { context, exception ->
+      context.fold("SafeCoroutines: ") { acc, element -> "$acc$element " }
+        .plus(exception)
+        .also(::println)
+    }
   }
 }

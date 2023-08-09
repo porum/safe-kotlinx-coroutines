@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 0.0.5
+
+Change inject point, improve compatibility
+
 ## Version 0.0.4
 
 Bug fix
