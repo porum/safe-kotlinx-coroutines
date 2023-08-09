@@ -58,7 +58,7 @@ val dokkaJavadocJar by tasks.registering(Jar::class) {
 
 publishing {
   publications {
-    create<MavenPublication>("pluginMaven") {
+    create<MavenPublication>("safe-kotlinx-coroutines-plugin") {
       artifact(sourceJar)
       artifact(dokkaJavadocJar)
       pom {

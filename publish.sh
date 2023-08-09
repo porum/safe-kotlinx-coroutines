@@ -1,0 +1,1 @@
+chmod +x ./gradlew && ./gradlew clean :safe-kotlinx-coroutines:publishSafe-kotlinx-coroutinesPublicationToMavenRepository :safe-kotlinx-coroutines-plugin:publishSafe-kotlinx-coroutines-pluginPublicationToMavenRepository
