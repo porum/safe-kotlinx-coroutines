@@ -36,7 +36,7 @@ dependencies {
   implementation(project(":safe-kotlinx-coroutines"))
   // implementation("io.github.porum:safe-kotlinx-coroutines:0.0.4")
   implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.4")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.7.3")
   implementation("androidx.appcompat:appcompat:1.5.0")
   testImplementation("junit:junit:4.+")
   androidTestImplementation("androidx.test.ext:junit:1.1.3")
