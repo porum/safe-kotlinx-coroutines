@@ -1,8 +1,8 @@
 # safe-kotlinx-coroutines
 
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[![safe-kotlinx-coroutines](https://img.shields.io/badge/safe--kotlinx--coroutines-0.0.5-brightgreen.svg)](https://search.maven.org/artifact/io.github.porum/safe-kotlinx-coroutines/0.0.5/jar)
-[![safe-kotlinx-coroutines-plugin](https://img.shields.io/badge/safe--kotlinx--coroutines--plugin-0.0.5-brightgreen.svg)](https://search.maven.org/artifact/io.github.porum/safe-kotlinx-coroutines-plugin/0.0.5/jar)
+[![safe-kotlinx-coroutines](https://img.shields.io/badge/safe--kotlinx--coroutines-0.0.6-brightgreen.svg)](https://search.maven.org/artifact/io.github.porum/safe-kotlinx-coroutines/0.0.6/jar)
+[![safe-kotlinx-coroutines-plugin](https://img.shields.io/badge/safe--kotlinx--coroutines--plugin-0.0.6-brightgreen.svg)](https://search.maven.org/artifact/io.github.porum/safe-kotlinx-coroutines-plugin/0.0.6/jar)
 
 在 launch 协程的时候如果 context 中没有 CoroutineExceptionHandler，则自动添加添加一个默认的 CoroutineExceptionHandler 用来兜底异常。
 

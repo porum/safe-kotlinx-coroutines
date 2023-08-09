@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-  compileSdk = 32
+  compileSdk = 33
 
   defaultConfig {
     applicationId = "com.panda912.safecoroutines.example"
     minSdk = 21
-    targetSdk = 32
+    targetSdk = 33
     versionCode = 1
     versionName = "1.0"
 
@@ -24,17 +24,18 @@ android {
     }
   }
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
   }
   kotlinOptions {
     jvmTarget = "1.8"
   }
+  namespace = "com.panda912.safecoroutines.example"
 }
 
 dependencies {
   // implementation(project(":safe-kotlinx-coroutines"))
-  implementation("io.github.porum:safe-kotlinx-coroutines:0.0.5")
+  implementation("io.github.porum:safe-kotlinx-coroutines:0.0.6")
   implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.7.3")
   implementation("androidx.appcompat:appcompat:1.6.1")

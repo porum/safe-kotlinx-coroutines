@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 0.0.6
+
+Fix plugin's jar lost
+
 ## Version 0.0.5
 
 Change inject point, improve compatibility

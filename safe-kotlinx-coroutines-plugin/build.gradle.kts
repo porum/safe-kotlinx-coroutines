@@ -10,7 +10,7 @@ plugins {
 dependencies {
   implementation("org.ow2.asm:asm-tree:9.2")
   implementation(gradleApi())
-  compileOnly("com.android.tools.build:gradle:7.3.0")
+  compileOnly("com.android.tools.build:gradle:7.4.1")
 }
 
 gradlePlugin {
@@ -58,7 +58,7 @@ val dokkaJavadocJar by tasks.registering(Jar::class) {
 
 publishing {
   publications {
-    create<MavenPublication>("safe-kotlinx-coroutines-plugin") {
+    create<MavenPublication>("pluginMaven") {
       artifact(sourceJar)
       artifact(dokkaJavadocJar)
       pom {
