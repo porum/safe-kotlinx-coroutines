@@ -38,10 +38,10 @@ abstract class SafeCoroutineVisitorFactory :
     classContext: ClassContext,
     nextClassVisitor: ClassVisitor
   ): ClassVisitor {
-    return CoroutineContextClassVisitor(nextClassVisitor)
+    return BuildersKtClassVisitor(nextClassVisitor)
   }
 
   override fun isInstrumentable(classData: ClassData): Boolean {
-    return classData.className == "kotlin.coroutines.CoroutineContext\$DefaultImpls"
+    return classData.className == "kotlinx.coroutines.BuildersKt"
   }
 }
