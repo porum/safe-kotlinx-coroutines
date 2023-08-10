@@ -22,29 +22,46 @@ scope.launch(GlobalCoroutineExceptionHandler()) {
 }
 ```
 
-### 用法（以 kts 为例）：
+### 配置（以 kts 为例）：
 
-1. 在 APP module 的 build.gradle.kts 中应用插件：
+1. 在工程根目录下的 build.gradle.kts 将插件添加到 classpath：
+
+```kotlin
+buildscript {
+  repositories {
+    // 👇👇👇
+    mavenCentral()
+  }
+  dependencies {
+    // 👇👇👇
+    classpath("io.github.porum:safe-kotlinx-coroutines-plugin:$version")
+  }
+}
+```
+
+2. 在 APP module 的 build.gradle.kts 中应用插件：
 
 ```kotlin
 plugins {
   id("com.android.application")
   id("kotlin-android")
-  // 👇👇👇 add plugin 👇👇👇
+  // 👇👇👇
   id("safe-kotlinx-coroutines")
 }
 ```
 
-2. 添加依赖：
+3. 在 APP module 的 build.gradle.kts 中添加依赖：
 
 ```kotlin
 dependencies {
-  // 👇👇👇 add dependencies 👇👇👇
+  // 👇👇👇
   implementation("io.github.porum:safe-kotlinx-coroutines:$version")
 }
 ```
 
-3. 设置一个全局的 Coroutine 异常回调接口用来输出异常信息：
+### 用法：
+
+配置完成之后不需要任何额外代码就已经可以使用了。如果想监听异常信息，可以设置全局设置一个默认的异常回调：
 
 ```kotlin
 // Like Thread.setDefaultUncaughtExceptionHandler
